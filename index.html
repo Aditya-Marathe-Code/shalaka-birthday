@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shalaka's Birthday</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    color: white;
+    background: black;
+    overflow-x: hidden;
+}
+
+/* Background collage */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('collage.jpg');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.3;
+    z-index: -1;
+}
+
+.container {
+    padding: 50px 20px;
+}
+
+.countdown {
+    font-size: 40px;
+    margin-top: 20px;
+}
+
+.widget {
+    margin-top: 30px;
+    display: none;
+}
+
+input {
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+}
+
+button {
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    background: hotpink;
+    color: white;
+}
+
+.birthday-mode {
+    animation: bgFlash 2s infinite alternate;
+}
+
+@keyframes bgFlash {
+    from {background-color: #ff69b4;}
+    to {background-color: #ff1493;}
+}
+
+.popup {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: hotpink;
+    padding: 15px;
+    border-radius: 10px;
+    display: none;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>Something Special is Coming 🎀</h1>
+    <div class="countdown" id="countdown"></div>
+
+    <br><br>
+
+    <input type="password" id="password" placeholder="Enter Secret Password">
+    <button onclick="checkPassword()">Open</button>
+
+    <div class="widget" id="secretWidget">
+        <h2>For You ❤️</h2>
+        <p>
+        You are the most beautiful soul I have ever met.   
+        I am lucky our paths crossed.
+        </p>
+        <img src="photo1.jpg" width="250">
+    </div>
+</div>
+
+<div class="popup" id="popup">
+Happiest birthday to the prettiest girl I have ever seen.  
+From Aditya Marathe (Your Bumble Match)
+</div>
+
+<script>
+
+// COUNTDOWN
+const birthday = new Date("March 29, 2026 00:00:00").getTime();
+const countdown = document.getElementById("countdown");
+
+setInterval(function() {
+    const now = new Date().getTime();
+    const distance = birthday - now;
+
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+
+    countdown.innerHTML = days + "d " + hours + "h " + minutes + "m ";
+
+}, 1000);
+
+
+// PASSWORD
+function checkPassword() {
+    const pass = document.getElementById("password").value;
+    if(pass === "bumble") {
+        document.getElementById("secretWidget").style.display = "block";
+    } else {
+        alert("Wrong password 😏");
+    }
+}
+
+
+// BIRTHDAY MODE
+const today = new Date();
+if(today.getMonth() === 2 && today.getDate() === 29) {
+
+    document.body.classList.add("birthday-mode");
+
+    const popup = document.getElementById("popup");
+
+    setInterval(function(){
+        popup.style.display = "block";
+        setTimeout(() => {
+            popup.style.display = "none";
+        }, 5000);
+    }, 15000);
+
+}
+</script>
+
+</body>
+</html>
